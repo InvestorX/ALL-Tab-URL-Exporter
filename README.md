@@ -30,7 +30,7 @@
 
 1. このリポジトリをクローンまたはダウンロード
    ```bash
-   git clone https://github.com/investorx/ALL-Tab-URL-Exporter.git
+   git clone https://github.com/InvestorX/ALL-Tab-URL-Exporter.git
    ```
 
 2. Chromeで `chrome://extensions/` を開く
@@ -92,3 +92,4 @@ ALL-Tab-URL/
 <p align="center">
   Made with 💖 and 🍣
 </p>
+
