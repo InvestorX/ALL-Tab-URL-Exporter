@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Generate Icons</title>
+</head>
+
+<body>
+    <h1>アイコン生成ツール</h1>
+    <p>各サイズのアイコンを右クリックして「名前を付けて画像を保存」してください。</p>
+
+    <h2>icon128.png</h2>
+    <canvas id="canvas128" width="128" height="128"></canvas>
+
+    <h2>icon48.png</h2>
+    <canvas id="canvas48" width="48" height="48"></canvas>
+
+    <h2>icon16.png</h2>
+    <canvas id="canvas16" width="16" height="16"></canvas>
+
+    <script>
+        function drawIcon(canvas, size) {
+            const ctx = canvas.getContext('2d');
+            const scale = size / 128;
+
+            // 背景グラデーション
+            const bgGrad = ctx.createLinearGradient(0, 0, size, size);
+            bgGrad.addColorStop(0, '#ffe6ee');
+            bgGrad.addColorStop(1, '#e6f7ff');
+
+            // ピンクグラデーション
+            const pinkGrad = ctx.createLinearGradient(0, 0, size, size);
+            pinkGrad.addColorStop(0, '#ff6b9d');
+            pinkGrad.addColorStop(1, '#e84a7f');
+
+            // ブルーグラデーション
+            const blueGrad = ctx.createLinearGradient(0, 0, size, size);
+            blueGrad.addColorStop(0, '#00d4ff');
+            blueGrad.addColorStop(1, '#0099cc');
+
+            // 背景
+            ctx.fillStyle = bgGrad;
+            roundRect(ctx, 0, 0, size, size, 20 * scale, true);
+
+            // タブ3（背景）
+            ctx.globalAlpha = 0.7;
+            ctx.fillStyle = '#ffffff';
+            ctx.shadowColor = 'rgba(0,0,0,0.2)';
+            ctx.shadowBlur = 3 * scale;
+            ctx.shadowOffsetX = 2 * scale;
+            ctx.shadowOffsetY = 2 * scale;
+            roundRect(ctx, 35 * scale, 20 * scale, 75 * scale, 50 * scale, 6 * scale, true);
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+            ctx.globalAlpha = 0.5;
+            ctx.fillStyle = blueGrad;
+            roundRect(ctx, 35 * scale, 20 * scale, 75 * scale, 12 * scale, 6 * scale, true);
+
+            // タブ2（中間）
+            ctx.globalAlpha = 0.85;
+            ctx.fillStyle = '#ffffff';
+            ctx.shadowColor = 'rgba(0,0,0,0.2)';
+            ctx.shadowBlur = 3 * scale;
+            ctx.shadowOffsetX = 2 * scale;
+            ctx.shadowOffsetY = 2 * scale;
+            roundRect(ctx, 25 * scale, 35 * scale, 75 * scale, 50 * scale, 6 * scale, true);
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+            ctx.globalAlpha = 0.7;
+            ctx.fillStyle = blueGrad;
+            roundRect(ctx, 25 * scale, 35 * scale, 75 * scale, 12 * scale, 6 * scale, true);
+
+            // タブ1（前面）
+            ctx.globalAlpha = 1;
+            ctx.fillStyle = '#ffffff';
+            ctx.shadowColor = 'rgba(0,0,0,0.2)';
+            ctx.shadowBlur = 3 * scale;
+            ctx.shadowOffsetX = 2 * scale;
+            ctx.shadowOffsetY = 2 * scale;
+            roundRect(ctx, 15 * scale, 50 * scale, 75 * scale, 50 * scale, 6 * scale, true);
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+            ctx.fillStyle = pinkGrad;
+            roundRect(ctx, 15 * scale, 50 * scale, 75 * scale, 12 * scale, 6 * scale, true);
+
+            // URLサークル
+            ctx.fillStyle = blueGrad;
+            ctx.shadowColor = 'rgba(0,0,0,0.2)';
+            ctx.shadowBlur = 3 * scale;
+            ctx.shadowOffsetX = 2 * scale;
+            ctx.shadowOffsetY = 2 * scale;
+            ctx.beginPath();
+            ctx.arc(85 * scale, 90 * scale, 20 * scale, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
+
+            // URLテキスト
+            ctx.fillStyle = '#ffffff';
+            ctx.font = `bold ${Math.max(8, 16 * scale)}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            if (size >= 48) {
+                ctx.fillText('URL', 85 * scale, 92 * scale);
+            }
+        }
+
+        function roundRect(ctx, x, y, width, height, radius, fill) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+            if (fill) ctx.fill();
+        }
+
+        drawIcon(document.getElementById('canvas128'), 128);
+        drawIcon(document.getElementById('canvas48'), 48);
+        drawIcon(document.getElementById('canvas16'), 16);
+
+        // Canvasを画像として表示
+        ['128', '48', '16'].forEach(size => {
+            const canvas = document.getElementById('canvas' + size);
+            const img = document.createElement('img');
+            img.src = canvas.toDataURL('image/png');
+            img.style.border = '1px solid #ccc';
+            img.style.marginLeft = '20px';
+            canvas.parentNode.insertBefore(img, canvas.nextSibling);
+        });
+    </script>
+</body>
+
+</html>

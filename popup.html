@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALL Tab URL Exporter</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1 class="title">🌸 Tab URL Exporter</h1>
+      <p class="subtitle">現在のウィンドウのタブURL一覧</p>
+    </header>
+
+    <div class="stats-bar">
+      <span class="stats-label">取得タブ数:</span>
+      <span id="tabCount" class="stats-value">0</span>
+    </div>
+
+    <div class="textarea-container">
+      <textarea id="urlList" readonly placeholder="URLを取得中..."></textarea>
+    </div>
+
+    <div class="button-group">
+      <button id="refreshBtn" class="btn btn-refresh" title="URLを再取得">
+        <span class="btn-icon">🔄</span>
+        <span class="btn-text">再取得</span>
+      </button>
+      <button id="copyBtn" class="btn btn-copy" title="クリップボードにコピー">
+        <span class="btn-icon">📋</span>
+        <span class="btn-text">コピー</span>
+      </button>
+      <button id="downloadBtn" class="btn btn-download" title="テキストファイルでダウンロード">
+        <span class="btn-icon">💾</span>
+        <span class="btn-text">ダウンロード</span>
+      </button>
+    </div>
+
+    <div id="notification" class="notification hidden"></div>
+
+    <footer class="footer">
+      <p>© 2026 ALL Tab URL Exporter</p>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
